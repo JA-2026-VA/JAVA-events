@@ -1180,7 +1180,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <div id="events-modal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Les rendez-vous de novembre</h2>
+                <h2>Les rendez-vous de Décembre</h2>
                 <span class="close-modal">&times;</span>
             </div>
             <hr>
