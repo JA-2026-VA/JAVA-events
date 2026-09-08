@@ -314,7 +314,7 @@
                     </div>
                 </div>
 
-                                <div class="event-item" data-date="2026-09-12">
+                <div class="event-item" data-date="2026-09-12">
                     <div class="event-left">
                         <span class="event-badge"><time datetime="2026-09-12">12 sept. 2026</time></span>
                         <h3>lendemain</h3>
@@ -350,7 +350,6 @@
                     </div>
                 </div>
 
-                <!-- Pour un événement sur 2 jours, mettez la date du dernier jour (ex: 2026-10-11) -->
                 <div class="event-item" data-date="2026-10-11">
                     <div class="event-left">
                         <span class="event-badge"><time datetime="2026-10-10">10 & 11 octobre 2026</time></span>
@@ -375,7 +374,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             // 1. Filtrage dynamique des événements passés
             const today = new Date();
-            today.setHours(0, 0, 0, 0); // Réinitialise l'heure à minuit pour comparer les dates uniquement
+            today.setHours(0, 0, 0, 0);
 
             const eventItems = document.querySelectorAll('.event-item');
             let activeCount = 0;
@@ -383,7 +382,7 @@
             eventItems.forEach(item => {
                 const eventDateStr = item.getAttribute('data-date');
                 if (eventDateStr) {
-                    const eventDate = new Date(eventDateStr + 'T23:59:59'); // Valide jusqu'à la fin de la journée
+                    const eventDate = new Date(eventDateStr + 'T23:59:59');
                     if (eventDate < today) {
                         item.classList.add('event-past');
                     } else {
@@ -393,11 +392,11 @@
             });
 
             // Mise à jour du chiffre dans le badge orange
-            const badge = idBadge = document.getElementById('event-count');
+            const badge = document.getElementById('event-count');
             if (badge) {
                 badge.textContent = activeCount;
                 if (activeCount === 0) {
-                    badge.style.display = 'none'; // Masque le badge s'il n'y a aucun événement
+                    badge.style.display = 'none';
                 }
             }
 
