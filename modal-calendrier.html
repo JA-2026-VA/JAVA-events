@@ -150,6 +150,11 @@
             gap: 15px;
         }
 
+        /* Masquage des événements passés */
+        .event-item.event-past {
+            display: none !important;
+        }
+
         .event-left {
             flex: 1;
         }
@@ -197,6 +202,13 @@
 
         .btn-more:hover {
             background: #465a69;
+        }
+
+        .no-events-msg {
+            text-align: center;
+            color: #777;
+            font-style: italic;
+            padding: 20px 0;
         }
 
         /* --- VISIONNEUSE DE FLYER --- */
@@ -254,66 +266,70 @@
 </head>
 <body>
 
-    <!-- BOUTON DECLENCHEUR FLOTTANT (Incrusté sur toutes vos pages) -->
+    <!-- BOUTON DECLENCHEUR FLOTTANT -->
     <a href="#" id="calendar-trigger" class="floating-calendar-btn" title="Voir le calendrier">
         <img src="https://drive.google.com/thumbnail?id=1G3Lg3_C7LKZRWlKTh5xmGNAtYCcL6mM5&sz=w1000" alt="Calendrier">
-        <span class="badge">5</span>
+        <span class="badge" id="event-count">0</span>
     </a>
 
     <!-- MODALE NOTIFICATION -->
     <div id="events-modal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Les rendez-vous de septembre</h2>
+                <h2>Prochains rendez-vous</h2>
                 <span class="close-modal">&times;</span>
             </div>
             <hr>
             
-            <div class="event-item">
-                <div class="event-left">
-                    <span class="event-badge"><time datetime="2026-09-09">9 sept. 2026</time></span>
-                    <h3>Messe de rentrée</h3>
-                    <p>SICHEM - 21, bd Alexandre Martin - ORLEANS</p>
-                    <p>Célébrée par notre aumônier <strong>Fr. Jean-Syméon</strong>, à qui vous pouvez <strong>confier vos intentions</strong> par message privé.<br>
-                    Pensez à <strong>prévoir de la monnaie</strong>, si vous souhaitez contribuer à la <strong>quête</strong>.</p>
+            <div id="events-container">
+                <!-- Attribut data-date au format AAAA-MM-JJ -->
+                <div class="event-item" data-date="2026-09-09">
+                    <div class="event-left">
+                        <span class="event-badge"><time datetime="2026-09-09">9 sept. 2026</time></span>
+                        <h3>Messe de rentrée</h3>
+                        <p>SICHEM - 21, bd Alexandre Martin - ORLEANS</p>
+                        <p>Célébrée par notre aumônier <strong>Fr. Jean-Syméon</strong>, à qui vous pouvez <strong>confier vos intentions</strong> par message privé.<br>
+                        Pensez à <strong>prévoir de la monnaie</strong>, si vous souhaitez contribuer à la <strong>quête</strong>.</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="event-item">
-                <div class="event-left">
-                    <span class="event-badge"><time datetime="2026-09-16">16 sept. 2026</time></span>
-                    <h3>Dîner de rentrée</h3>
-                    <p>SICHEM - 21, bd Alexandre Martin - ORLEANS</p>
+                <div class="event-item" data-date="2026-09-16">
+                    <div class="event-left">
+                        <span class="event-badge"><time datetime="2026-09-16">16 sept. 2026</time></span>
+                        <h3>Dîner de rentrée</h3>
+                        <p>SICHEM - 21, bd Alexandre Martin - ORLEANS</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="event-item">
-                <div class="event-left">
-                    <span class="event-badge"><time datetime="2026-09-23">23 sept. 2026</time></span>
-                    <h3>Prière</h3>
-                    <p>SICHEM - 21, bd Alexandre Martin - ORLEANS</p>
-                    <p>Prions avec notre saint patron <strong>St Pier Giorgio Frassati</strong></p>
+                <div class="event-item" data-date="2026-09-23">
+                    <div class="event-left">
+                        <span class="event-badge"><time datetime="2026-09-23">23 sept. 2026</time></span>
+                        <h3>Prière</h3>
+                        <p>SICHEM - 21, bd Alexandre Martin - ORLEANS</p>
+                        <p>Prions avec notre saint patron <strong>St Pier Giorgio Frassati</strong></p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="event-item">
-                <div class="event-left">
-                    <span class="event-badge"><time datetime="2026-09-30">30 sept. 2026</time></span>
-                    <h3>Enseignement</h3>
-                    <p>SICHEM - 21, bd Alexandre Martin - ORLEANS</p>
-                    <p><strong>Magnifica Humanitas :</strong> L'encyclique du pape Léon XIV expliquée par le Fr. Jean-Syméon.</p>
+                <div class="event-item" data-date="2026-09-30">
+                    <div class="event-left">
+                        <span class="event-badge"><time datetime="2026-09-30">30 sept. 2026</time></span>
+                        <h3>Enseignement</h3>
+                        <p>SICHEM - 21, bd Alexandre Martin - ORLEANS</p>
+                        <p><strong>Magnifica Humanitas :</strong> L'encyclique du pape Léon XIV expliquée par le Fr. Jean-Syméon.</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="event-item">
-                <div class="event-left">
-                    <span class="event-badge"><time datetime="2026-10-10">10 & 11 octobre 2026</time></span>
-                    <h3>30 ans de JAVA</h3>
-                    <p>Château de Charbonnière</p>
+                <!-- Pour un événement sur 2 jours, mettez la date du dernier jour (ex: 2026-10-11) -->
+                <div class="event-item" data-date="2026-10-11">
+                    <div class="event-left">
+                        <span class="event-badge"><time datetime="2026-10-10">10 & 11 octobre 2026</time></span>
+                        <h3>30 ans de JAVA</h3>
+                        <p>Château de Charbonnière</p>
+                    </div>
+                    <button class="btn-more" data-flyer="https://drive.google.com/thumbnail?id=1kwl5gcMKFJgSsuJD_RMgsTfYGE-HkZT1&sz=w1000">
+                        En savoir plus
+                    </button>
                 </div>
-                <button class="btn-more" data-flyer="https://drive.google.com/thumbnail?id=1kwl5gcMKFJgSsuJD_RMgsTfYGE-HkZT1&sz=w1000">
-                    En savoir plus
-                </button>
             </div>
         </div>
 
@@ -326,11 +342,48 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // 1. Filtrage dynamique des événements passés
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Réinitialise l'heure à minuit pour comparer les dates uniquement
+
+            const eventItems = document.querySelectorAll('.event-item');
+            let activeCount = 0;
+
+            eventItems.forEach(item => {
+                const eventDateStr = item.getAttribute('data-date');
+                if (eventDateStr) {
+                    const eventDate = new Date(eventDateStr + 'T23:59:59'); // Valide jusqu'à la fin de la journée
+                    if (eventDate < today) {
+                        item.classList.add('event-past');
+                    } else {
+                        activeCount++;
+                    }
+                }
+            });
+
+            // Mise à jour du chiffre dans le badge orange
+            const badge = idBadge = document.getElementById('event-count');
+            if (badge) {
+                badge.textContent = activeCount;
+                if (activeCount === 0) {
+                    badge.style.display = 'none'; // Masque le badge s'il n'y a aucun événement
+                }
+            }
+
+            // Affichage d'un message si aucun événement futur
+            if (activeCount === 0) {
+                const container = document.getElementById('events-container');
+                const noEvent = document.createElement('p');
+                noEvent.className = 'no-events-msg';
+                noEvent.textContent = 'Aucun événement à venir pour le moment.';
+                container.appendChild(noEvent);
+            }
+
+            // 2. Ouverture / Fermeture de la modale
             const trigger = document.getElementById('calendar-trigger');
             const modal = document.getElementById('events-modal');
             const closeBtn = document.querySelector('.close-modal');
 
-            // 1. Ouverture / Fermeture de la modale
             if (trigger && modal) {
                 trigger.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -348,7 +401,7 @@
                 });
             }
 
-            // 2. Gestion de l'affichage des Flyers
+            // 3. Gestion de l'affichage des Flyers
             const flyerViewer = document.getElementById('flyer-viewer');
             const flyerImage = document.getElementById('flyer-display');
             const closeFlyer = document.querySelector('.close-flyer');
@@ -363,13 +416,13 @@
                 });
             });
 
-            if(closeFlyer) {
+            if (closeFlyer) {
                 closeFlyer.addEventListener('click', () => {
                     flyerViewer.style.display = 'none';
                 });
             }
 
-            if(flyerViewer) {
+            if (flyerViewer) {
                 flyerViewer.addEventListener('click', (e) => {
                     if (e.target === flyerViewer) {
                         flyerViewer.style.display = 'none';
