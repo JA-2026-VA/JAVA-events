@@ -343,95 +343,105 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // 1. Filtrage dynamique des événements passés
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. Filtrage dynamique des événements passés
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
 
-            const eventItems = document.querySelectorAll('.event-item');
-            let activeCount = 0;
+        const eventItems = document.querySelectorAll('.event-item');
+        let activeCount = 0;
 
-            eventItems.forEach(item => {
-                const eventDateStr = item.getAttribute('data-date');
-                if (eventDateStr) {
-                    const eventDate = new Date(eventDateStr + 'T23:59:59');
-                    if (eventDate < today) {
-                        item.classList.add('event-past');
-                    } else {
-                        activeCount++;
-                    }
+        eventItems.forEach(item => {
+            const eventDateStr = item.getAttribute('data-date');
+            if (eventDateStr) {
+                const eventDate = new Date(eventDateStr + 'T23:59:59');
+                if (eventDate < today) {
+                    item.classList.add('event-past');
+                } else {
+                    activeCount++;
                 }
-            });
-
-            // Mise à jour du chiffre dans le badge orange
-            const badge = document.getElementById('event-count');
-            if (badge) {
-                badge.textContent = activeCount;
-                if (activeCount === 0) {
-                    badge.style.display = 'none';
-                }
-            }
-
-            // Affichage d'un message si aucun événement futur
-            if (activeCount === 0) {
-                const container = document.getElementById('events-container');
-                const noEvent = document.createElement('p');
-                noEvent.className = 'no-events-msg';
-                noEvent.textContent = 'Aucun événement à venir pour le moment.';
-                container.appendChild(noEvent);
-            }
-
-            // 2. Ouverture / Fermeture de la modale
-            const trigger = document.getElementById('calendar-trigger');
-            const modal = document.getElementById('events-modal');
-            const closeBtn = document.querySelector('.close-modal');
-
-            if (trigger && modal) {
-                trigger.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    modal.classList.add('active');
-                });
-
-                closeBtn.addEventListener('click', () => {
-                    modal.classList.remove('active');
-                });
-
-                modal.addEventListener('click', (event) => {
-                    if (event.target === modal) {
-                        modal.classList.remove('active');
-                    }
-                });
-            }
-
-            // 3. Gestion de l'affichage des Flyers
-            const flyerViewer = document.getElementById('flyer-viewer');
-            const flyerImage = document.getElementById('flyer-display');
-            const closeFlyer = document.querySelector('.close-flyer');
-            const btnsMore = document.querySelectorAll('.btn-more');
-
-            btnsMore.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation(); 
-                    const url = btn.getAttribute('data-flyer');
-                    flyerImage.src = url;
-                    flyerViewer.style.display = 'flex';
-                });
-            });
-
-            if (closeFlyer) {
-                closeFlyer.addEventListener('click', () => {
-                    flyerViewer.style.display = 'none';
-                });
-            }
-
-            if (flyerViewer) {
-                flyerViewer.addEventListener('click', (e) => {
-                    if (e.target === flyerViewer) {
-                        flyerViewer.style.display = 'none';
-                    }
-                });
             }
         });
-    </script>
+
+        // Mise à jour du badge
+        const badge = document.getElementById('event-count');
+        if (badge) {
+            badge.textContent = activeCount;
+            if (activeCount === 0) {
+                badge.style.display = 'none';
+            }
+        }
+
+        // Message si aucun événement
+        if (activeCount === 0) {
+            const container = document.getElementById('events-container');
+            const noEvent = document.createElement('p');
+            noEvent.className = 'no-events-msg';
+            noEvent.textContent = 'Aucun événement à venir pour le moment.';
+            container.appendChild(noEvent);
+        }
+
+        // 2. Gestion de la modale avec transmission d'événements à la page parente
+        const trigger = document.getElementById('calendar-trigger');
+        const modal = document.getElementById('events-modal');
+        const closeBtn = document.querySelector('.close-modal');
+
+        function openCalendar() {
+            modal.classList.add('active');
+            window.parent.postMessage('openModal', '*'); // Active l'interaction sur l'iframe
+        }
+
+        function closeCalendar() {
+            modal.classList.remove('active');
+            window.parent.postMessage('closeModal', '*'); // Désactive l'interaction sur l'iframe
+        }
+
+        if (trigger && modal) {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                openCalendar();
+            });
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeCalendar);
+            }
+
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    closeCalendar();
+                }
+            });
+        }
+
+        // 3. Visionneuse de Flyer
+        const flyerViewer = document.getElementById('flyer-viewer');
+        const flyerImage = document.getElementById('flyer-display');
+        const closeFlyer = document.querySelector('.close-flyer');
+        const btnsMore = document.querySelectorAll('.btn-more');
+
+        btnsMore.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                const url = btn.getAttribute('data-flyer');
+                flyerImage.src = url;
+                flyerViewer.style.display = 'flex';
+            });
+        });
+
+        if (closeFlyer) {
+            closeFlyer.addEventListener('click', () => {
+                flyerViewer.style.display = 'none';
+            });
+        }
+
+        if (flyerViewer) {
+            flyerViewer.addEventListener('click', (e) => {
+                if (e.target === flyerViewer) {
+                    flyerViewer.style.display = 'none';
+                }
+            });
+        }
+    });
+</script>
 </body>
 </html>
