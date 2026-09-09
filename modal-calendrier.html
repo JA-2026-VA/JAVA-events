@@ -22,7 +22,7 @@ html, body {
 
         /* --- BOUTON DECLENCHEUR FLOTTANT (Bas-Droite) --- */
         .floating-calendar-btn {
-            position: fixed;
+            position: absolute;
             top: 50px;
             right: 25px;
             width: 60px;
@@ -33,6 +33,9 @@ html, body {
             justify-content: center;
             align-items: center;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            bottom: 0;
+            right: 0;
+            margin: 10px; /* Ajuste pour centrer dans les 80px de l'iframe */
             cursor: pointer;
             z-index: 9998;
             transition: transform 0.2s ease, background-color 0.2s ease;
@@ -444,35 +447,20 @@ html, body {
         }
     });
 
-        const calendarBtn = document.querySelector('.floating-calendar-btn'); // Vérifie la classe du bouton
-let isModalOpen = false;
+const calendarBtn = document.querySelector('.floating-calendar-btn'); // Ton bouton
+const closeBtn = document.querySelector('.close-modal-btn'); // croix de fermeture
 
-// 1. Quand la souris entre sur le bouton : on active les clics sur l'iframe
-calendarBtn.addEventListener('mouseenter', () => {
-    window.parent.postMessage('enableClicks', '*');
-});
-
-// 2. Quand la souris sort du bouton : on désactive les clics (sauf si la modale est ouverte)
-calendarBtn.addEventListener('mouseleave', () => {
-    if (!isModalOpen) {
-        window.parent.postMessage('disableClicks', '*');
-    }
-});
-
-// 3. Lors du clic pour OUVRIR la modale
+// Clic sur le bouton -> Prévenir le parent d'agrandir l'iframe
 calendarBtn.addEventListener('click', () => {
-    isModalOpen = true;
     window.parent.postMessage('openModal', '*');
-    // ... code pour afficher la modale ...
+    // Code qui affiche ta modale dans l'iframe (ex: modal.style.display = 'block')
 });
 
-// 4. Lors de la FERMETURE de la modale (sur bouton de fermeture/croix)
-const closeBtn = document.querySelector('.close-modal-btn'); // Adapte le sélecteur
+// Clic sur la fermeture -> Prévenir le parent de réduire l'iframe
 if (closeBtn) {
     closeBtn.addEventListener('click', () => {
-        isModalOpen = false;
         window.parent.postMessage('closeModal', '*');
-        // ... code pour cacher la modale ...
+        // Code qui masque ta modale dans l'iframe (ex: modal.style.display = 'none')
     });
 }
 </script>
