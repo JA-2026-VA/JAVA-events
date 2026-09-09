@@ -23,7 +23,7 @@
         /* --- BOUTON DECLENCHEUR FLOTTANT (Bas-Droite) --- */
         .floating-calendar-btn {
             position: fixed;
-            top: 100px;
+            top: 50px;
             right: 25px;
             width: 60px;
             height: 60px;
@@ -104,6 +104,7 @@
             border-radius: 12px;
             position: relative;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            pointer-events: auto; /* Permet d'interagir avec la modale tout en laissant passer les clics à côté */
         }
 
         .modal-header {
