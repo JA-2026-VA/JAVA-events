@@ -1,0 +1,68 @@
+[
+  {
+    "title": "Messe de rentrée",
+    "date": "2026-09-09T20:30:00",
+    "label": "9 sept.",
+    "type": "proche",
+    "link": ""
+  },
+  {
+    "title": "Dîner de rentrée",
+    "date": "2026-09-16T20:30:00",
+    "label": "16 sept.",
+    "type": "proche",
+    "link": ""
+  },
+  {
+    "title": "Prière",
+    "date": "2026-09-23T20:30:00",
+    "label": "23 sept.",
+    "type": "proche",
+    "link": ""
+  },
+  {
+    "title": "Enseignement",
+    "date": "2026-09-30T20:30:00",
+    "label": "30 sept.",
+    "type": "proche",
+    "link": ""
+  },
+  {
+    "title": "30 ans de JAVA",
+    "date": "2026-10-10T00:00:00",
+    "endDate": "2026-10-11T23:59:59",
+    "label": "10 & 11 oct.",
+    "type": "long_terme",
+    "link": ""
+  },
+  {
+    "title": "WE de l'Avent",
+    "date": "2026-12-05T00:00:00",
+    "endDate": "2026-12-06T23:59:59",
+    "label": "5 & 6 déc.",
+    "type": "long_terme",
+    "link": ""
+  },
+  {
+    "title": "Soirée de Noël",
+    "date": "2026-12-12T20:30:00",
+    "label": "12 déc.",
+    "type": "long_terme",
+    "link": ""
+  },
+  {
+    "title": "WE de fin d'année",
+    "date": "2027-06-19T00:00:00",
+    "endDate": "2027-06-20T23:59:59",
+    "label": "19 & 20 juin",
+    "type": "long_terme",
+    "link": ""
+  },
+  {
+    "title": "Barbecue",
+    "date": "2027-07-03T19:00:00",
+    "label": "3 juill.",
+    "type": "long_terme",
+    "link": ""
+  }
+]
