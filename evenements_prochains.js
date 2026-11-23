@@ -23,12 +23,6 @@
     "texte": "11 nov. | Découverte",
     "lien": "#"
   },
-
-
-
-
-
-
   {
     "type": "autre",
     "date": "2026-12-06T23:59",
@@ -46,7 +40,7 @@
     "date": "2027-06-20T23:59",
     "texte": "19 & 20 juin | WE de fin d'année",
     "lien": "#"
-  }
+  },
   {
     "type": "autre",
     "date": "2027-07-03T23:59",
