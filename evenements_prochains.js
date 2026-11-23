@@ -1,28 +1,31 @@
 [
   {
     "type": "mercredi",
-    "date": "2026-10-21T20:30",
-    "texte": "21 oct. | Prière",
+    "date": "2026-11-25T20:30",
+    "texte": "25 nov. | Prière",
     "lien": "#"
   },
   {
     "type": "mercredi",
-    "date": "2026-10-28T20:30",
-    "texte": "28 oct. | Enseignement",
+    "date": "2026-12-02T20:30",
+    "texte": "2 déc. | Messe",
+    "lien": "#"
+  },
+
+    {
+    "type": "mercredi",
+    "date": "2026-12-09T20:30",
+    "texte": "9 déc. | Prière",
     "lien": "#"
   },
   {
     "type": "mercredi",
-    "date": "2026-11-04T20:30",
-    "texte": "4 nov. | Messe",
+    "date": "2026-12-16T20:30",
+    "texte": "16 déc. | Découverte",
     "lien": "#"
   },
-  {
-    "type": "mercredi",
-    "date": "2026-11-11T20:30",
-    "texte": "11 nov. | Découverte",
-    "lien": "#"
-  },
+
+  
   {
     "type": "autre",
     "date": "2026-12-06T23:59",
